@@ -1,0 +1,30 @@
+name: Building, Testing and Deploy Render
+
+on:
+ push:
+  branches: ["main"]
+ pull_request:
+  branches: ["main"]
+ workflow_dispatch: 
+
+jobs:
+ build-and-test-locally:
+  runs-on: ubuntu-latest
+
+  steps:
+  - name: Copy the source code
+    uses: actions/Checkout@v4
+  - name: Use Node.js 20.x
+    uses: actions/setup-node@v4
+    with:
+     node-version: 20.x
+     cache: 'npm'
+  - name: Install npm dependencies
+    run: npm install
+
+  - name: Start unit tests
+    run: npm run test:unit
+
+  - name: My SoftUni Username
+    run: echo 'Todor_Zarkov'
+    
