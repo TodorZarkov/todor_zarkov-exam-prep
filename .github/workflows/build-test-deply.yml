@@ -51,3 +51,14 @@ jobs:
     run: npm start &
   - name: Start UI tests
     run: npm run test:ui
+
+ deploy-on-render:
+  runs-on: ubuntu-latest
+  if: github.ref == 'refs/heads/main'
+  needs: build-and-test-ui
+  steps:
+   - name: Deploy to render
+     uses: halfdomelabs/render-deploy@v0.1.2
+     with:
+      service-id: ${{secrets.RENDER_EXAM_PREP_II_ID}}
+      render-token: ${{secrets.RENDER_EXAM_PREP_II_KEY}}
